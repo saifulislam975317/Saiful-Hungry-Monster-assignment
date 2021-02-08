@@ -1,0 +1,35 @@
+.input-group.mb-3 {
+    width: 500px;
+    margin: 0 auto;
+    padding: 50px 0px;
+}
+
+.meal {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px;
+}
+
+div#mealDetails {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 22px;
+}
+
+#singleMealDetails img{
+    width: 300px;
+    border-radius: 20px;
+}
+
+#mealDetails img{
+    width: 250px;
+    
+}
+
+#singleMealDetails{
+    display: grid;
+    justify-content: center;
+    margin-bottom: 50px;
+    padding: 10px;
+}
