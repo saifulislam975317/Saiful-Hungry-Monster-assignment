@@ -1,40 +1,54 @@
-fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=salad')
-.then(res=>res.json())
-.then(data=>displayMeals(data.meals))
+
+document.getElementById('searchButton').addEventListener('click', function () {
+    const inputValue = document.getElementById('inputValue').value;
 
 
-const displayMeals=meals=>{
-    console.log(meals)
-    const mealsDiv=document.getElementById('mealDetails')
 
-    meals.forEach(meal => {
-        
-        const mealDiv=document.createElement('div');
-        mealDiv.className='meal'
-        const mealInfo=`
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`)
+        .then(res => res.json())
+        .then(data => displayMeals(data.meals))
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${inputValue}`)
+        .then(res => res.json())
+        .then(data => displayMeals(data.meals))
+
+
+
+    const displayMeals = meals => {
+        console.log(meals)
+        const mealsDiv = document.getElementById('mealDetails')
+
+        meals.forEach(meal => {
+
+            const mealDiv = document.createElement('div');
+            mealDiv.className = 'meal'
+            const mealInfo = `
         <img
         onclick="displayMealDetails('${meal.strMeal}')" src="${meal.strMealThumb} " <h2>${meal.strMeal}</h2> 
         
-    
         `;
-        mealDiv.innerHTML=mealInfo;
-        mealsDiv.appendChild(mealDiv);
+            mealDiv.innerHTML = mealInfo;
+            mealsDiv.appendChild(mealDiv);
 
-    });
-}
+            
+        });
+    }
 
-const displayMealDetails=name=>{
-    const url=`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`
-    fetch(url)
-    .then(res => res.json())
-    .then(data =>renderMealInfo(data.meals[0]))
-    
-}
 
-const renderMealInfo=meal=>{
-    console.log(meal);
-    const mealDivision=document.getElementById('singleMealDetails');
-    mealDivision.innerHTML=`
+
+    const displayMealDetails = name => {
+        const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => renderMealInfo(data.meals[0]))
+
+    }
+
+
+    const renderMealInfo = meal => {
+
+        const mealDivision = document.getElementById('singleMealDetails');
+        mealDivision.innerHTML = `
     <img src="${meal.strMealThumb}">
     <h2>${meal.strMeal}</h2>
     <li>${meal.strIngredient1}</li>
@@ -47,12 +61,11 @@ const renderMealInfo=meal=>{
     <li>${meal.strIngredient8}</li>
     <li>${meal.strIngredient9}</li>
     
-    
     `
-}
+    }
+
+
+})
 
 
 
-// {/* <button onclick="displayMealDetails('${meal.strMeal}')">Details</button> */}
-
-// {/* <h3>${meal.strMeal}</h3> */}
